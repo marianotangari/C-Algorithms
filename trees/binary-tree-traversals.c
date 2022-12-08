@@ -15,7 +15,7 @@ void postorder_traversal(struct node *tree);
 
 int main() {
 
-	//Creating root node (a) and siblings.
+	//Creating root node (a) and children.
 	struct node *a, *b, *c, *d, *e, *f, *g, *h; 
 
 	a = (struct node *) malloc(sizeof(struct node));
