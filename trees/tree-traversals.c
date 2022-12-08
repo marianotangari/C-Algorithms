@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /*We are going to traverse the following binary tree: 
 
 				|A|
@@ -14,9 +13,7 @@
 		  /	\	  \
 		 /	 \	   \
 	   |G|   |H|   |F|
-
 */
-
 
 // Binary tree node representation using structs. 
 struct node {
