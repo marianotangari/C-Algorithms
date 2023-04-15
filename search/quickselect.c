@@ -31,11 +31,11 @@ int partition(int* arr, int p, int pivot) {
     int x = arr[pivot];
 	
 	for (int j = p; j < pivot; j++) {
-	    
-        if(arr[j] <= x) {
-            swap(i, j, arr);
-            i++;
-        }
+		
+	    	if(arr[j] <= x) {
+			swap(i, j, arr);
+		    	i++;
+		}
     }
     swap(i, pivot, arr);
     return i; 
@@ -44,5 +44,5 @@ int partition(int* arr, int p, int pivot) {
 void swap(int i, int j, int* arr){
     int temp = arr[i];
     arr[i] = arr[j];
-	arr[j] = temp;
+    arr[j] = temp;
 }
