@@ -11,9 +11,7 @@ int main() {
 
 int quickselect(int* arr, int l, int h, int k) {
     
-	if(l == h) {
-		return arr[h]; 
-	}
+	if(l == h) return arr[h]; 
 	
 	int p = partition(arr, l, h);
 	
