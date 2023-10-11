@@ -15,12 +15,8 @@ int quickselect(int* arr, int l, int h, int k) {
 	
 	int p = partition(arr, l, h);
 	
-	if(k < p) {
-		return quickselect(arr, l, p - 1, k); 
-	}
-	if(k > p) {
-		return quickselect(arr, p + 1, h, k); 
-	}
+	if(k < p) return quickselect(arr, l, p - 1, k); 
+	if(k > p) return quickselect(arr, p + 1, h, k); 
 	
 	return arr[p]; 
 }
@@ -30,12 +26,11 @@ int partition(int* arr, int p, int pivot) {
     int i = p;
     int x = arr[pivot];
 	
-	for (int j = p; j < pivot; j++) {
-	    
+    for (int j = p; j < pivot; j++) {
         if(arr[j] <= x) {
-            swap(i, j, arr);
-            i++;
-        }
+	    swap(i, j, arr);
+	    i++;
+	}
     }
     swap(i, pivot, arr);
     return i; 
@@ -44,5 +39,5 @@ int partition(int* arr, int p, int pivot) {
 void swap(int i, int j, int* arr){
     int temp = arr[i];
     arr[i] = arr[j];
-	arr[j] = temp;
+    arr[j] = temp;
 }
