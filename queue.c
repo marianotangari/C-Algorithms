@@ -1,112 +1,76 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Queue {
-    struct Node* list; 
-} Queue; 
-
 typedef struct Node {
-    int value; 
-    struct Node* next; 
-    struct Node* prev;
-} Node; 
+    int value;
+    struct Node* next;
+} Node;
+
+typedef struct Queue {
+    struct Node* front;
+    struct Node* rear;
+    int size;
+} Queue;
 
 void enqueue(Queue* queue, int v) {
-    
-    Node* node = (Node*) malloc(sizeof(Node)); 
-    node->value = v; 
-    
-    if (queue->list == NULL) {
+    Node* node =  malloc(sizeof(Node));
+    node->value = v;
+    node->next = NULL;
 
-        node->prev = NULL; 
-        node->next = NULL; 
-        queue->list = node; 
-        
+    if (queue->front == NULL) {
+        queue->front = node;
+        queue->rear = node;
     } else {
-        
-        Node* head = queue->list; 
-        
-        while (queue->list->next != NULL) {
-            queue->list = queue->list->next; 
-        }
-        
-        node->prev = queue->list->next; 
-        queue->list->next = node; 
-        
-        queue->list = head; 
+        queue->rear->next = node;
+        queue->rear = node;
     }
+
+    queue->size++;
 }
 
 int dequeue(Queue* queue) {
-    
-    Node* head = queue->list; 
-    
-    if (head != NULL) {
-        
-        int v = queue->list->value; 
-        
-        if (queue->list->next != NULL) {
-            
-            Node* next = queue->list->next; 
-            queue->list->next->prev = NULL; 
-            free(queue->list);
-            queue->list = next; 
-        } else {
-            queue->list = NULL; 
-        }
-        
-        return v; 
+    if (queue->front != NULL) {
+        Node* temp = queue->front;
+        int value = temp->value;
+        queue->front = temp->next;
+        free(temp);
+        queue->size--;
+        return value;
     }
-    return -1; 
+    return -1; // or any other appropriate value for an empty queue
 }
 
 int queue_size(Queue* queue) {
-    
-    if (queue->list == NULL) {
-        return 0; 
-    } 
-    
-    Node* head = queue->list;
-    
-    int i = 1; 
-    
-    while (queue->list->next != NULL) {
-        i++; 
-        queue->list = queue->list->next; 
-    }
-    
-    queue->list = head; 
-    
-    return i; 
+    return queue->size;
 }
 
 int peek(Queue* queue) {
-     
-    if (queue->list == NULL) {
-        return -1; 
+    if (queue->front != NULL) {
+        return queue->front->value;
     }
-    
-    return queue->list->value; 
+    return -1;
 }
 
 int main() {
-    
-    Queue* queue = (Queue*) malloc(sizeof(Queue)); 
-    
-    enqueue(queue, 3); 
-    enqueue(queue, 4); 
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+
+    enqueue(queue, 3);
+    enqueue(queue, 4);
     enqueue(queue, 6);
     enqueue(queue, 8);
     enqueue(queue, 12);
     enqueue(queue, 16);
-    
-    printf("%d\n", peek(queue)); 
-    
-    int length = queue_size(queue); 
-    
+
+    printf("%d\n", peek(queue));
+
+    int length = queue_size(queue);
+
     for (int i = 0; i < length; i++) {
         printf("%d\n", dequeue(queue));
     }
-    
-    printf("%d\n", queue_size(queue)); 
+
+    printf("%d\n", queue_size(queue));
+
+    free(queue);
+    return 0;
 }
