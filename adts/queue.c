@@ -41,7 +41,7 @@ int dequeue(Queue* queue) {
     return -1; // or any other appropriate value for an empty queue
 }
 
-int queue_size(Queue* queue) {
+int size(Queue* queue) {
     return queue->size;
 }
 

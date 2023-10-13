@@ -14,13 +14,13 @@ int main() {
 
     printf("%d\n", peek(queue));
 
-    int length = queue_size(queue);
+    int length = size(queue);
 
     for (int i = 0; i < length; i++) {
         printf("%d\n", dequeue(queue));
     }
 
-    printf("%d\n", queue_size(queue));
+    printf("%d\n", size(queue));
 
     free(queue);
 
